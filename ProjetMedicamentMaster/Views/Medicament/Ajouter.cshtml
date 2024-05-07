@@ -1,0 +1,68 @@
+﻿@model ProjetMedicament.Models.Metier.Prescrire;
+@using ProjetMedicament.Models.DAO;
+@using Microsoft.AspNetCore.Mvc.Rendering;
+
+
+@{
+    ViewBag.Title = "Ajouter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Ajouter un résultat</h2>
+
+@if (Model != null)
+{
+    using (Html.BeginForm("Ajouter", "Medicament", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="card col-8 mx-auto mt-5">
+            <div class="card-body">
+                <h3 class="card-title">Ajouter un résultat</h3>
+                <div class="form-horizontal">
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <!-- Id Medicament -->
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend mr-2 col-lg-4 col-xl-3">
+                            <span class="input-group-text" id="id-famille-input">Id Medicament : </span>
+                        </div>
+                        @Html.EditorFor(model => model.Id_medicament, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Id_medicament, "", new { @class = "text-danger" })
+                    </div>
+
+                    <!-- Id Dosage -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend mr-2 col-lg-4 col-xl-3">
+                            <span class="input-group-text" id="id-famille-input">Id Dosage : </span>
+                        </div>
+                        @Html.EditorFor(model => model.Id_dosage, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Id_dosage, "", new { @class = "text-danger" })
+                    </div>
+                    <!-- Id Type Individu -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend mr-2 col-lg-4 col-xl-3">
+                            <span class="input-group-text" id="id-famille-input">Id Type Individu : </span>
+                        </div>
+                        @Html.EditorFor(model => model.Id_type_individu, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Id_type_individu, "", new { @class = "text-danger" })
+                    </div>
+
+                    <!-- Posologie -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend mr-2 col-lg-4 col-xl-3">
+                            <span class="input-group-text" id="posologie-input">Posologie :</span>
+                        </div>
+                        <input name="Posologie" type="text" class="form-control" id="Posologie" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Enregistrer" class="btn btn-primary" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

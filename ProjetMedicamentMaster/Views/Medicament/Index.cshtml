@@ -1,0 +1,65 @@
+﻿@model System.Data.DataTable
+@using System.Data;
+@{
+    ViewBag.Title = "Liste des Medicaments";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@if (Model != null)
+{
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/icons/bootstrap-icons.css">
+    <div class="container">
+        <div class="col-md-8 col-sm-8">
+            <div class="blanc">
+                <h1>Liste des Medicaments</h1>
+            </div>
+
+            <table class="table table-bordered table-striped table-responsive">
+                <thread>
+                    <tr>
+                        <th>Id medicament</th>
+                        <th>Id famille</th>
+                        <th>Famille</th>
+                        <th>Nom commercial</th>
+                        <th>Type d'individu</th>
+                        <th>Quantite dosage</th>
+                        <th>Unité dosage</th>
+                        <th>Posologie</th>
+                        <th style="width:80px">Modifier</th>
+                        <th style="width:80px">Supprimer</th>
+
+                    </tr>
+                </thread>
+                @foreach (DataRow dataRow in Model.Rows)
+                {
+                    <tr>
+                        @foreach (var item in dataRow.ItemArray)
+                        {
+                            <td>
+                                @item.ToString()
+                            </td>
+                        }
+                        <td style="text-align:center">
+                            <span>
+                                <a href="@Url.Action("Modifier", "Medicament", new { id = dataRow[0] })" class="btn btn-primary">
+                                    <i class="bi bi-pencil-fill"></i> Modifier
+                                </a>
+                            </span>
+                        </td>
+                        <td style="text-align:center">
+                            <span>
+                                <a href="@Url.Action("Supprimer", "Medicament", new { id = dataRow[0] })" class="btn btn-danger">
+                                    <i class="bi bi-trash-fill"></i> Supprimer
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="form-group">
+                <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
+                    @Html.ActionLink("Retourner à l'acceuil","Index","Home" ,null, new {@class = "btn-default btn-primary" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
